@@ -17,19 +17,65 @@
             {% if prediction == 1 %}
                 <h2 class="text-danger">Gotcha! This is a SPAM message.</h2>
                 <div id="warning-message" style="color: red; font-weight: bold;">
-                    Warning: This email is classified as Spam. Please be cautious!
+                     Warning: This email is classified as Spam. Please be cautious!
                 </div>
-                <div class="result-image">
-                    <img src="{{ url_for('static', filename='images/spam.webp') }}" alt="" class="result-icon">
-                </div>
+                <marquee direction="up" class="result-image">
+                    <img src="{{ url_for('static', filename='images/Virus Spamming.webp') }}" alt="" class="result-icon">
+                </marquee>
+                <audio autoplay hidden>
+                    <source src="{{ url_for('static', filename='audio/spam.mp3') }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <script>
+                    function createSadElement() {
+                        const elements = ['fa-thumbs-down', 'fa-face-sad-tear', 'fa-face-frown'];
+                        const element = document.createElement('i');
+                        // Randomly choose between thumbs down and sad faces
+                        element.className = 'fa-solid ' + elements[Math.floor(Math.random() * elements.length)];
+                        element.style.left = Math.random() * 100 + 'vw';
+                        element.style.animationDuration = Math.random() * 3 + 2 + 's';
+                        // Add wobble effect
+                        element.style.animationTimingFunction = 'cubic-bezier(0.37, 0, 0.63, 1)';
+                        element.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+                        document.body.appendChild(element);
+                        
+                        // Remove the element after animation completes
+                        setTimeout(() => {
+                            element.remove();
+                        }, 5000);
+                    }
+
+                    // Create sad elements periodically
+                    setInterval(createSadElement, 300);
+                </script>
             {% elif prediction == 0 %}
                 <h2 class="text-success">Great! This is NOT a spam message.</h2>
-                <div class="result-image">
+                <marquee direction="up" class="result-image">
                     <img src="{{ url_for('static', filename='images/not-spam.webp') }}" alt=""" class="result-icon">
-                </div>
+                </marquee>
+                <audio autoplay hidden>
+                    <source src="{{ url_for('static', filename='audio/ham.mp3') }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <script>
+                    function createHeart() {
+                        const heart = document.createElement('i');
+                        heart.className = 'fa-solid fa-heart';
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                        document.body.appendChild(heart);
+                        
+                        // Remove the heart element after animation completes
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 5000);
+                    }
+
+                    // Create hearts periodically
+                    setInterval(createHeart, 300);
+                </script>
             {% endif %}
         </div>
-
         <div class="action-buttons">
             <a href="/">
                 <button class="btn btn-outline-success my-2 my-sm-0">Go Back</button>
@@ -47,3 +93,6 @@
     </footer>
 </body>
 </html>
+
+
+
